@@ -1,6 +1,7 @@
 import style from './Tabs.module.css';
 import {useState, useEffect} from 'react';
 import {assignId} from '../../../utils/generateRandomId';
+import {Text} from '../../../UI/Text/Text';
 
 import {ReactComponent as ArrowIcon} from './img/arrow.svg';
 import {ReactComponent as EyeIcon} from './img/eye.svg';
@@ -42,11 +43,11 @@ export const Tabs = () => {
     <div className={style.container}>
       {
         isDropdown && (<div className={style.wrapperBtn}>
-          <button id='menu-dropdown' className={style.btn}
+          <Text As='button' id='menu-dropdown' className={style.btn}
             onClick={() => setIsDropdownOpen(!isDropdownOpen)}>
             {menuActive}
             <ArrowIcon width={15} height={15} />
-          </button>
+          </Text>
         </div>)
       }
 
@@ -56,13 +57,13 @@ export const Tabs = () => {
             onClick={() => setIsDropdownOpen(false)}>
             {LIST.map(({value, id, Icon}) => (
               <li className={style.item} key={id}>
-                <button className={style.btn}
+                <Text As='button' className={style.btn}
                   onClick={() => {
                     setMenuActive(value);
                   }}>
                   {value}
                   {Icon && <Icon width={30} height={30} />}
-                </button>
+                </Text>
               </li>))}
           </ul>
         )

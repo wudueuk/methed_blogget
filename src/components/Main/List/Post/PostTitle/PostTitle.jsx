@@ -1,12 +1,15 @@
 import style from './PostTitle.module.css';
 import PropTypes from 'prop-types';
+import {Text} from '../../../../../UI/Text';
 
 export const PostTitle = ({postTitleData}) => (
-  <h2 className={style.title}>
-    <a className={style.linkPost} href={postTitleData.link}>
+  <Text As='h2' className={style.title}>
+    <Text As='a' size={18} tsize={26} dsize={32} bold
+      className={style.linkPost}
+      href={postTitleData.link}>
       {postTitleData.title}
-    </a>
-  </h2>
+    </Text>
+  </Text>
 );
 
 PostTitle.propTypes = {
