@@ -1,11 +1,10 @@
-import {useEffect, useState} from 'react';
+import {useState} from 'react';
 import {URL_API} from '../api/const';
 
-export const useAuth = (token) => {
-  const [auth, setAuth] = useState();
-  console.log('auth: ', auth);
+export const useAuth = () => {
+  const [auth, setAuth] = useState({});
 
-  useEffect(() => {
+  const getAuth = token => {
     fetch(`${URL_API}/api/v1/me`, {
       headers: {
         Authorization: `bearer ${token}`,
@@ -25,8 +24,7 @@ export const useAuth = (token) => {
       .catch(err => {
         console.error(err);
       });
-  }, [token]);
+  };
 
-
-  return auth;
+  return [auth, getAuth];
 };

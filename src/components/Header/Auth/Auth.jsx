@@ -4,33 +4,15 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
 import {useEffect, useState} from 'react';
-import {URL_API} from '../../../api/const';
+import {useAuth} from '../../../hooks/useAuth';
 
 export const Auth = ({token, delToken}) => {
-  const [auth, setAuth] = useState({});
+  const [auth, setAuth] = useAuth(token);
   const [showLogout, setShowLogout] = useState(false);
 
   useEffect(() => {
     if (token) {
-      fetch(`${URL_API}/api/v1/me`, {
-        headers: {
-          Authorization: `bearer ${token}`,
-        },
-      })
-        .then(response => {
-          if (response.ok) {
-            return response.json();
-          } else if (response.status === 401) {
-            localStorage.removeItem('bearer');
-          }
-        })
-        .then(({name, icon_img: iconImg}) => {
-          const img = iconImg.replace(/\?.*$/, '');
-          setAuth({name, img});
-        })
-        .catch(() => {
-          setAuth({});
-        });
+      setAuth(token);
     } else return;
   }, [token]);
 
