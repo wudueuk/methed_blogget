@@ -7,10 +7,10 @@ export const PostPicture = ({imageDate}) => {
     return <img className={style.img} src={notphoto} alt="Нет картинки" />;
   } else {
     return <img className={style.img}
-      src={imageDate.src} alt={imageDate.alt} />;
+      src={imageDate} />;
   }
 };
 
 PostPicture.propTypes = {
-  imageDate: PropTypes.object,
+  imageDate: PropTypes.string,
 };

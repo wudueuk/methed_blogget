@@ -7,5 +7,5 @@ export const PostDate = ({dateTime}) => (
 );
 
 PostDate.propTypes = {
-  dateTime: PropTypes.string,
+  dateTime: PropTypes.number,
 };

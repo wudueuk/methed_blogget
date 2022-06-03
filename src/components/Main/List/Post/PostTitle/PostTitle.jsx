@@ -6,7 +6,7 @@ export const PostTitle = ({postTitleData}) => (
   <Text As='h2' className={style.title}>
     <Text As='a' size={18} tsize={26} dsize={32} bold
       className={style.linkPost}
-      href={postTitleData.link}>
+      href={postTitleData.permalink}>
       {postTitleData.title}
     </Text>
   </Text>

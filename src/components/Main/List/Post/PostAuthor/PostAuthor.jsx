@@ -4,11 +4,11 @@ import {Text} from '../../../../../UI/Text';
 
 export const PostAuthor = ({authorData}) => (
   <Text As='a' size={12} tsize={14} color='orange'
-    className={style.linkAuthor} href={authorData.link}>
-    {authorData.nicname}
+    className={style.linkAuthor} href='/#'>
+    {authorData}
   </Text>
 );
 
 PostAuthor.propTypes = {
-  authorData: PropTypes.object,
+  authorData: PropTypes.string,
 };

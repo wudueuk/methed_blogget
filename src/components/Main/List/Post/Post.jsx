@@ -8,18 +8,27 @@ import PostAuthor from './PostAuthor';
 import ButtonDelete from './ButtonDelete';
 
 export const Post = ({postData}) => {
-  const {title, author, ups, date, picture} = postData;
+  const {
+    title,
+    permalink,
+    author,
+    ups,
+    created,
+    thumbnail,
+  } = postData.data;
+  const titleData = {title, permalink};
+
   return (
     <li className={style.post}>
-      <PostPicture imageDate={picture} />
+      <PostPicture imageDate={thumbnail} />
       <div className={style.content}>
-        <PostTitle postTitleData={title} />
+        <PostTitle postTitleData={titleData} />
         <PostAuthor authorData={author} />
       </div>
 
       <Rating ratingUps={ups} />
 
-      <PostDate dateTime={date} />
+      <PostDate dateTime={created} />
       <ButtonDelete />
     </li>
   );

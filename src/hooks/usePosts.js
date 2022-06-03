@@ -2,14 +2,14 @@ import {useContext, useEffect, useState} from 'react';
 import {URL_API} from '../api/const';
 import {tokenContext} from '../context/tokenContext';
 
-export const useAuth = () => {
-  const [auth, setAuth] = useState({});
-  const {token, delToken} = useContext(tokenContext);
+export const usePosts = () => {
+  const [posts, setPosts] = useState([]);
+  const {token} = useContext(tokenContext);
 
   useEffect(() => {
     if (!token) return;
 
-    fetch(`${URL_API}/api/v1/me`, {
+    fetch(`${URL_API}/best?limit=20`, {
       headers: {
         Authorization: `bearer ${token}`,
       },
@@ -20,18 +20,13 @@ export const useAuth = () => {
         }
         return response.json();
       })
-      .then(({name, icon_img: iconImg}) => {
-        const img = iconImg.replace(/\?.*$/, '');
-        setAuth({name, img});
+      .then(({data}) => {
+        setPosts(data.children);
       })
       .catch(err => {
         console.error(err);
-        setAuth({});
-        delToken();
       });
   }, [token]);
 
-  const clearAuth = () => setAuth({});
-
-  return [auth, clearAuth];
+  return [posts];
 };
