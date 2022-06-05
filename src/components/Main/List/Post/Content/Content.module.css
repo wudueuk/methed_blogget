@@ -15,6 +15,16 @@
   transition: box-shadow 0.36s ease-in-out;
 }
 
+.linkAuthor {
+  position: relative;
+  width: min-content;
+  transition: color 0.36s ease-in-out;
+}
+
+.linkAuthor:hover {
+  color: #2d2d2d;
+}
+
 @media (min-width: 580px) {
   .linkPost:hover {
     color: #cc6633;

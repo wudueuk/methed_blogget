@@ -1,9 +1,0 @@
-.linkAuthor {
-  position: relative;
-  width: min-content;
-  transition: color 0.36s ease-in-out;
-}
-
-.linkAuthor:hover {
-  color: #2d2d2d;
-}

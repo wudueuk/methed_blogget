@@ -1,33 +1,28 @@
 import style from './Post.module.css';
 import PropTypes from 'prop-types';
 import PostPicture from './PostPicture';
-import PostTitle from './PostTitle';
+import Content from './Content';
 import Rating from './Rating';
 import PostDate from './PostDate';
-import PostAuthor from './PostAuthor';
 import ButtonDelete from './ButtonDelete';
 
 export const Post = ({postData}) => {
   const {
+    id,
     title,
-    permalink,
     author,
     ups,
     created,
     thumbnail,
+    subreddit,
   } = postData.data;
-  const titleData = {title, permalink};
 
   return (
     <li className={style.post}>
       <PostPicture imageDate={thumbnail} />
-      <div className={style.content}>
-        <PostTitle postTitleData={titleData} />
-        <PostAuthor authorData={author} />
-      </div>
-
+      <Content id={id} postTitle={title}
+        author={author} subreddit={subreddit} />
       <Rating ratingUps={ups} />
-
       <PostDate dateTime={created} />
       <ButtonDelete />
     </li>
