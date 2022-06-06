@@ -5,8 +5,9 @@ import PropTypes from 'prop-types';
 import {useEffect, useRef} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {Comments} from './Comments/Comments';
+import {FormComment} from './FormComment/FormComment';
 
-export const Modal = ({id, closeModal}) => {
+export const Modal = ({id, closeModal, closePreloader}) => {
   const overlayRef = useRef(null);
   const [commentsData] = useCommentsData({id});
 
@@ -32,7 +33,8 @@ export const Modal = ({id, closeModal}) => {
     };
   }, []);
 
-  if (commentsData) {
+  if (commentsData.length > 0) {
+    closePreloader();
     return ReactDOM.createPortal(
       <div className={style.overlay} ref={overlayRef}>
         <div className={style.modal}>
@@ -42,6 +44,7 @@ export const Modal = ({id, closeModal}) => {
           </div>
 
           <p className={style.author}>{commentsData[0].author}</p>
+          <FormComment />
 
           <Comments comments={commentsData[1]} />
 
@@ -60,4 +63,5 @@ export const Modal = ({id, closeModal}) => {
 Modal.propTypes = {
   id: PropTypes.string,
   closeModal: PropTypes.func,
+  closePreloader: PropTypes.func,
 };

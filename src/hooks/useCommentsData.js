@@ -35,7 +35,6 @@ export const useCommentsData = ({id}) => {
         ]) => {
           const comments = children.map(item => item.data);
           setCommentsData([post, comments]);
-          console.log('гыу commentsData: ', commentsData);
         },
       )
       .catch(err => {

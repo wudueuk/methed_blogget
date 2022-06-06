@@ -14,14 +14,13 @@ export const Post = ({postData}) => {
     ups,
     created,
     thumbnail,
-    subreddit,
   } = postData.data;
 
   return (
     <li className={style.post}>
       <PostPicture imageDate={thumbnail} />
       <Content id={id} postTitle={title}
-        author={author} subreddit={subreddit} />
+        author={author} />
       <Rating ratingUps={ups} />
       <PostDate dateTime={created} />
       <ButtonDelete />

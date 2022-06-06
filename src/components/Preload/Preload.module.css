@@ -1,0 +1,21 @@
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.text {
+  position: fixed;
+  margin: 0 auto;
+  width: 300px;
+  top: calc(50% - 50px);
+  left: calc(50% - 150px);
+}
+
+.load {
+  font-size: 32px;
+  color: white;
+  font-weight: 700;
+  text-align: center;
+}

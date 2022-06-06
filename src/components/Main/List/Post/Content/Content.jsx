@@ -3,9 +3,11 @@ import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
 import {useState} from 'react';
 import Modal from '../../../../Modal';
+import Preload from '../../../../Preload';
 
-export const Content = ({author, postTitle, id, subreddit}) => {
+export const Content = ({author, postTitle, id}) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isPreloader, setIsPreloader] = useState(false);
 
   return (
     <div className={style.content}>
@@ -14,6 +16,7 @@ export const Content = ({author, postTitle, id, subreddit}) => {
           className={style.linkPost}
           href='#'
           onClick={() => {
+            setIsPreloader(true);
             setIsModalOpen(true);
           }}>
           {postTitle}
@@ -23,10 +26,12 @@ export const Content = ({author, postTitle, id, subreddit}) => {
         className={style.linkAuthor} href='/#'>
         {author}
       </Text>
-      {isModalOpen && (<Modal id={id} subreddit={subreddit}
-        closeModal={() => {
-          setIsModalOpen(false);
-        }} />)}
+      {isPreloader && (<Preload />)}
+      {isModalOpen && (<Modal id={id} closeModal={() => {
+        setIsModalOpen(false);
+      }} closePreloader={() => {
+        setIsPreloader(false);
+      }} />)}
     </div>
   );
 };
@@ -35,5 +40,4 @@ Content.propTypes = {
   author: PropTypes.string,
   postTitle: PropTypes.string,
   id: PropTypes.string,
-  subreddit: PropTypes.string,
 };
