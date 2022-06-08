@@ -6,8 +6,8 @@ import Modal from '../../../../Modal';
 import Preload from '../../../../Preload';
 
 export const Content = ({author, postTitle, id}) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
   const [isPreloader, setIsPreloader] = useState(false);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
     <div className={style.content}>
@@ -29,7 +29,6 @@ export const Content = ({author, postTitle, id}) => {
       {isPreloader && (<Preload />)}
       {isModalOpen && (<Modal id={id} closeModal={() => {
         setIsModalOpen(false);
-      }} closePreloader={() => {
         setIsPreloader(false);
       }} />)}
     </div>
