@@ -3,11 +3,12 @@ import {ReactComponent as LoginIcon} from './img/login.svg';
 import {urlAuth} from '../../../api/auth';
 import {Text} from '../../../UI/Text';
 import {useState, useContext} from 'react';
-import {tokenContext} from '../../../context/tokenContext';
 import {authContext} from '../../../context/authContext';
+import {useDispatch} from 'react-redux';
+import {deleteToken} from '../../../store';
 
 export const Auth = () => {
-  const {delToken} = useContext(tokenContext);
+  const dispatch = useDispatch();
   const [showLogout, setShowLogout] = useState(false);
   const {auth, clearAuth} = useContext(authContext);
 
@@ -28,7 +29,7 @@ export const Auth = () => {
               console.log('clock logout');
               setShowLogout(false);
               clearAuth();
-              delToken();
+              dispatch(deleteToken());
             }}>Выйти</span> : ''}
         </div>
       ) : (

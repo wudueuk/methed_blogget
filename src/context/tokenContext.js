@@ -1,14 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import {useToken} from '../hooks/useToken';
 
 export const tokenContext = React.createContext({});
 
 export const TokenContextProvider = ({children}) => {
-  const [token, delToken] = useToken();
+  const [token, setToken] = React.useState('');
 
   return (
-    <tokenContext.Provider value={{token, delToken}}>
+    <tokenContext.Provider value={{token, setToken}}>
       {children}
     </tokenContext.Provider>
   );
