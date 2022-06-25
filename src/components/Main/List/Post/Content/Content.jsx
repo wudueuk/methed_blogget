@@ -3,10 +3,8 @@ import PropTypes from 'prop-types';
 import {Text} from '../../../../../UI/Text';
 import {useState} from 'react';
 import Modal from '../../../../Modal';
-import Preload from '../../../../Preload';
 
 export const Content = ({author, postTitle, id}) => {
-  const [isPreloader, setIsPreloader] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   return (
@@ -16,7 +14,6 @@ export const Content = ({author, postTitle, id}) => {
           className={style.linkPost}
           href='#'
           onClick={() => {
-            setIsPreloader(true);
             setIsModalOpen(true);
           }}>
           {postTitle}
@@ -26,10 +23,8 @@ export const Content = ({author, postTitle, id}) => {
         className={style.linkAuthor} href='/#'>
         {author}
       </Text>
-      {isPreloader && (<Preload />)}
       {isModalOpen && (<Modal id={id} closeModal={() => {
         setIsModalOpen(false);
-        setIsPreloader(false);
       }} />)}
     </div>
   );

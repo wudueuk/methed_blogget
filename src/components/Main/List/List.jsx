@@ -1,7 +1,7 @@
 import style from './List.module.css';
 import Post from './Post';
 import {usePosts} from '../../../hooks/usePosts';
-import PostsLoader from './PostsLoader';
+import Preloader from '../../../UI/Preloader';
 
 export const List = () => {
   const [posts, loading] = usePosts();
@@ -9,7 +9,7 @@ export const List = () => {
   if (posts) {
     return (
       <ul className={style.list}>
-        {loading ? (<PostsLoader />) : posts.map((postData, id) => (
+        {loading ? (<Preloader />) : posts.map((postData, id) => (
           <Post key={id} postData={postData} />
         ))}
       </ul>

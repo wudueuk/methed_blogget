@@ -7,11 +7,12 @@ import {useDispatch} from 'react-redux';
 import {deleteToken} from '../../../store/tokenReducer';
 import {useAuth} from '../../../hooks/useAuth';
 import AuthLoader from './AuthLoader';
+import ErrorLogin from './ErrorLogin';
 
 export const Auth = () => {
   const dispatch = useDispatch();
   const [showLogout, setShowLogout] = useState(false);
-  const [auth, loading, clearAuth] = useAuth();
+  const [auth, loading, status, clearAuth] = useAuth();
 
   return (
     <div className={style.container}>
@@ -27,16 +28,20 @@ export const Auth = () => {
           </button>
           {showLogout ? <span className={style.logout}
             onClick={() => {
-              console.log('clock logout');
               setShowLogout(false);
               clearAuth();
               dispatch(deleteToken());
             }}>Выйти</span> : ''}
         </div>
-      ) : (
-        <Text As='a' className={style.authLink} href={urlAuth}>
+      ) : status === 'err' ?
+        (<Text As='a' className={style.authLink} href={urlAuth}>
           <LoginIcon className={style.svg} width={128} height={128} />
-        </Text>)}
+          <ErrorLogin />
+        </Text>) :
+        (<Text As='a' className={style.authLink} href={urlAuth}>
+          <LoginIcon className={style.svg} width={128} height={128} />
+        </Text>)
+      }
     </div>
   );
 };

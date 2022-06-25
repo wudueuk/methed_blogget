@@ -39,7 +39,6 @@ export const Modal = ({id, closeModal}) => {
       <div className={style.overlay} ref={overlayRef}>
         <div className={style.modal}>
           {status === 'loading' && <Preloader />}
-          {status === 'error' && 'Error ...'}
           {status === 'loaded' && (
             <>
               <h2 className={style.title}>{commentsData[0].title}</h2>
@@ -51,14 +50,32 @@ export const Modal = ({id, closeModal}) => {
               <FormComment />
 
               <Comments comments={commentsData[1]} />
-
-              <button className={style.close} onClick={() => {
-                closeModal();
-              }}>
-                <CloseIcon />
-              </button>
             </>
           )}
+          <button className={style.close} onClick={() => {
+            closeModal();
+          }}>
+            <CloseIcon />
+          </button>
+        </div>
+      </div>,
+      document.getElementById('modal-root'),
+    );
+  } else {
+    return ReactDOM.createPortal(
+      <div className={style.overlay} ref={overlayRef}>
+        <div className={style.modal}>
+          {status === 'loading' && <Preloader />}
+          {status === 'error' && (
+            <>
+              <h2 className={style.title}>Ошибка загрузки данных</h2>
+            </>
+          )}
+          <button className={style.close} onClick={() => {
+            closeModal();
+          }}>
+            <CloseIcon />
+          </button>
         </div>
       </div>,
       document.getElementById('modal-root'),

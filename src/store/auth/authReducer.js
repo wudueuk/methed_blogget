@@ -9,6 +9,7 @@ const initialState = {
   loading: false,
   data: {},
   error: '',
+  status: 'none',
 };
 
 export const authReducer = (state = initialState, action) => {
@@ -24,17 +25,20 @@ export const authReducer = (state = initialState, action) => {
         loading: false,
         data: action.data,
         error: '',
+        status: 'logined',
       };
     case AUTH_REQUEST_ERROR:
       return {
         ...state,
         loading: false,
         error: '',
+        status: 'err',
       };
     case AUTH_LOGOUT:
       return {
         ...state,
         data: {},
+        status: 'none',
       };
 
     default:
