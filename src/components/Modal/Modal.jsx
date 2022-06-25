@@ -6,10 +6,11 @@ import {useEffect, useRef} from 'react';
 import {useCommentsData} from '../../hooks/useCommentsData';
 import {Comments} from './Comments/Comments';
 import {FormComment} from './FormComment/FormComment';
+import Preloader from '../../UI/Preloader';
 
 export const Modal = ({id, closeModal}) => {
   const overlayRef = useRef(null);
-  const [commentsData] = useCommentsData({id});
+  const [commentsData, status] = useCommentsData({id});
 
   const handleClick = e => {
     const target = e.target;
@@ -37,21 +38,27 @@ export const Modal = ({id, closeModal}) => {
     return ReactDOM.createPortal(
       <div className={style.overlay} ref={overlayRef}>
         <div className={style.modal}>
-          <h2 className={style.title}>{commentsData[0].title}</h2>
+          {status === 'loading' && <Preloader />}
+          {status === 'error' && 'Error ...'}
+          {status === 'loaded' && (
+            <>
+              <h2 className={style.title}>{commentsData[0].title}</h2>
 
-          <div className={style.content}>
-          </div>
+              <div className={style.content}>
+              </div>
 
-          <p className={style.author}>{commentsData[0].author}</p>
-          <FormComment />
+              <p className={style.author}>{commentsData[0].author}</p>
+              <FormComment />
 
-          <Comments comments={commentsData[1]} />
+              <Comments comments={commentsData[1]} />
 
-          <button className={style.close} onClick={() => {
-            closeModal();
-          }}>
-            <CloseIcon />
-          </button>
+              <button className={style.close} onClick={() => {
+                closeModal();
+              }}>
+                <CloseIcon />
+              </button>
+            </>
+          )}
         </div>
       </div>,
       document.getElementById('modal-root'),

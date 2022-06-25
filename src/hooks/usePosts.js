@@ -1,32 +1,16 @@
-import {useEffect, useState} from 'react';
-import {URL_API} from '../api/const';
-import {useSelector} from 'react-redux';
+import {useEffect} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
+import {postsRequestAsync} from '../store/posts/action';
 
 export const usePosts = () => {
-  const [posts, setPosts] = useState([]);
+  const posts = useSelector(state => state.posts.data);
   const token = useSelector(state => state.tokenReducer.token);
+  const loading = useSelector(state => state.auth.loading);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if (!token) return;
-
-    fetch(`${URL_API}/best?limit=20`, {
-      headers: {
-        Authorization: `bearer ${token}`,
-      },
-    })
-      .then(response => {
-        if (response.status === 401) {
-          throw new Error(response.status);
-        }
-        return response.json();
-      })
-      .then(({data}) => {
-        setPosts(data.children);
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    dispatch(postsRequestAsync());
   }, [token]);
 
-  return [posts];
+  return [posts, loading];
 };

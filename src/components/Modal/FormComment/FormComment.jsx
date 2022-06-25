@@ -2,12 +2,11 @@ import {Text} from '../../../UI/Text';
 import style from './FormComment.module.css';
 import {useSelector, useDispatch} from 'react-redux';
 import {updateComment} from '../../../store/commentReducer';
-import {useAuth} from '../../../hooks/useAuth';
 
 export const FormComment = () => {
   const value = useSelector(state => state.commentReducer.comment);
   const dispatch = useDispatch();
-  const [auth] = useAuth();
+  const auth = useSelector(state => state.auth.data);
 
   const handleSubmit = e => {
     e.preventDefault();
