@@ -6,8 +6,9 @@ import {
 
 const initialState = {
   loading: false,
-  data: [],
+  posts: [],
   error: '',
+  after: '',
 };
 
 export const postsReducer = (state = initialState, action) => {
@@ -21,8 +22,9 @@ export const postsReducer = (state = initialState, action) => {
       return {
         ...state,
         loading: false,
-        data: action.data,
+        posts: action.posts,
         error: '',
+        after: action.after,
       };
     case POSTS_REQUEST_ERROR:
       return {
