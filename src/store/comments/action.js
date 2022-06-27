@@ -19,7 +19,7 @@ export const commentsRequestError = (error) => ({
   error,
 });
 
-export const commentsRequestAsync = ({id}) => (dispatch, getState) => {
+export const commentsRequestAsync = (id) => (dispatch, getState) => {
   const token = getState().tokenReducer.token;
 
   if (!token) return;
@@ -35,7 +35,7 @@ export const commentsRequestAsync = ({id}) => (dispatch, getState) => {
       (data) => {
         const post = data.data[0].data.children[0].data;
         const comments = data.data[1].data.children;
-        const commentsData = [post, comments];
+        const commentsData = {post, comments};
         dispatch(commentsRequestSuccess(commentsData));
       },
     )
