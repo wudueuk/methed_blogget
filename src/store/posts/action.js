@@ -9,6 +9,7 @@ export const CHANGE_PAGE = 'CHANGE_PAGE';
 
 export const postsRequest = () => ({
   type: POSTS_REQUEST,
+  loading: true,
 });
 
 export const postsRequestSuccess = (data) => ({
@@ -35,7 +36,7 @@ export const changePage = (page) => ({
 
 export const postsRequestAsync = (newPage) => (dispatch, getState) => {
   let page = getState().posts.page;
-  if (newPage) {
+  if (newPage && newPage !== '*') {
     page = newPage;
     dispatch(changePage(page));
   }
@@ -45,7 +46,7 @@ export const postsRequestAsync = (newPage) => (dispatch, getState) => {
   const loading = getState().posts.loading;
   const isLast = getState().posts.isLast;
 
-  if (!token || loading || isLast) return;
+  if (!token || loading || isLast || page === '*') return;
 
   dispatch(postsRequest());
 

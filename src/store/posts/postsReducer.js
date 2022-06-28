@@ -12,7 +12,7 @@ const initialState = {
   error: '',
   after: '',
   isLast: false,
-  page: '',
+  page: '*',
 };
 
 export const postsReducer = (state = initialState, action) => {

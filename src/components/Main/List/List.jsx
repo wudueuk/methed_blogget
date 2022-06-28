@@ -1,18 +1,28 @@
 import style from './List.module.css';
 import Post from './Post';
 import {useEffect, useRef} from 'react';
-import {useParams, Outlet} from 'react-router-dom';
+import {useParams, Outlet, useNavigate} from 'react-router-dom';
 import {postsRequestAsync} from '../../../store/posts/action';
 import {useSelector, useDispatch} from 'react-redux';
+import {LIST} from '../Tabs/Tabs';
+
+const checkPage = page => {
+  if (LIST.find(item => item.link === page)) {
+    return true;
+  } else {
+    return false;
+  }
+};
 
 export const List = () => {
   const posts = useSelector(state => state.posts.posts);
   const endList = useRef(null);
   const dispatch = useDispatch();
   const {page} = useParams();
+  const navigate = useNavigate();
 
   useEffect(() => {
-    dispatch(postsRequestAsync(page));
+    checkPage(page) ? dispatch(postsRequestAsync(page)) : navigate('../*');
   }, [page]);
 
   useEffect(() => {
