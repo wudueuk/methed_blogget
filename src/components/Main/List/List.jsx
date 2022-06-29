@@ -16,6 +16,7 @@ const checkPage = page => {
 
 export const List = () => {
   const posts = useSelector(state => state.posts.posts);
+  const countPages = useSelector(state => state.posts.countPages);
   const endList = useRef(null);
   const dispatch = useDispatch();
   const {page} = useParams();
@@ -26,21 +27,23 @@ export const List = () => {
   }, [page]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver((entries) => {
-      if (entries[0].isIntersecting) {
-        dispatch(postsRequestAsync());
-      }
-    }, {
-      rootMargin: '100px',
-    });
+    if (countPages < 3) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          dispatch(postsRequestAsync());
+        }
+      }, {
+        rootMargin: '100px',
+      });
 
-    observer.observe(endList.current);
+      observer.observe(endList.current);
 
-    return () => {
-      if (endList.current) {
-        observer.unobserve(endList.current);
-      }
-    };
+      return () => {
+        if (endList.current) {
+          observer.unobserve(endList.current);
+        }
+      };
+    }
   }, [endList.current]);
 
   return (
@@ -49,7 +52,17 @@ export const List = () => {
         {posts.map(({data}) => (
           <Post key={data.id} postData={data} />
         ))}
-        <li ref={endList} className={style.end} />
+        {
+          countPages < 3 ?
+            <li ref={endList} className={style.end} /> :
+            (
+              <div className={style.end}>
+                <button className={style.more} onClick={() => {
+                  dispatch(postsRequestAsync());
+                }}>Показать еще</button>
+              </div>
+            )
+        }
       </ul>
       <Outlet />
     </>

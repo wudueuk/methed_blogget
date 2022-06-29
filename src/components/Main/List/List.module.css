@@ -7,4 +7,15 @@
 
 .end {
   flex-basis: 100%;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.more {
+  background-color: brown;
+  border-color: wheat;
+  color: white;
+  border-radius: 5px;
+  width: 250px;
+  padding: 10px 0px;
 }

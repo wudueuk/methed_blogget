@@ -1,0 +1,15 @@
+.title {
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.text {
+  text-align: center;
+}
