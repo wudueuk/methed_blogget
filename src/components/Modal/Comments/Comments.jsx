@@ -5,13 +5,13 @@ import {Text} from '../../../UI/Text';
 export const Comments = ({comments}) => (
   <ul className={style.list}>
     {comments.length ? (
-      comments.map((item) => item.data.body && (
-        <li className={style.item} key={item.data.id}>
+      comments.map((item) => item.body && (
+        <li className={style.item} key={item.id}>
           <Text As='h3' className={style.author} size={18} tsize={22}>
-            {item.data.author}
+            {item.author}
           </Text>
           <Text As='p' className={style.comment} size={14} tsize={18}>
-            {item.data.body.replaceAll(`&gt;`, ' ')}
+            {item.body.replaceAll(`&gt;`, ' ')}
           </Text>
           {/* <PostDate date={item.data.created} /> */}
         </li>
