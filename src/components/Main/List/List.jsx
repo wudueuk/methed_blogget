@@ -2,7 +2,7 @@ import style from './List.module.css';
 import Post from './Post';
 import {useEffect, useRef} from 'react';
 import {useParams, Outlet, useNavigate} from 'react-router-dom';
-import {postsRequestAsync} from '../../../store/posts/action';
+import {postsRequestAsync} from '../../../store/posts/actionPosts';
 import {useSelector, useDispatch} from 'react-redux';
 import {LIST} from '../Tabs/Tabs';
 

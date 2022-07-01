@@ -1,16 +1,17 @@
 import {useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
-import {postsRequestAsync} from '../store/posts/action';
+import {postsRequestAsync} from '../store/posts/actionPosts';
 
 export const usePosts = () => {
   const posts = useSelector(state => state.posts.posts);
   const token = useSelector(state => state.tokenReducer.token);
-  const loading = useSelector(state => state.auth.loading);
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (!token) return;
+
     dispatch(postsRequestAsync());
   }, [token]);
 
-  return [posts, loading];
+  return [posts];
 };

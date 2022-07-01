@@ -4,7 +4,7 @@ import {
   POSTS_REQUEST_ERROR,
   POSTS_REQUEST_SUCCESS,
   POSTS_REQUEST_SUCCESS_AFTER
-} from './action';
+} from './actionPosts';
 
 const initialState = {
   loading: false,
